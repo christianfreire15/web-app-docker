@@ -11,10 +11,10 @@
 4. URL accesible
   `http://localhost:5000/`
   
-5. Funcionamiento
+5. Descripción
   
-  1. Existe una página principal donde se encuentran cargadas 3 imágenes con una url pública
+  * Existe una página principal donde se encuentran cargadas 3 imágenes con una url pública
     
-  2. Mediante el botón "Analizar" se realizará la consulta mediante API al servicio de IMAGGA donde se obtendrá las etiquetas de cada imagen
-    
-  3. Mediante el botón "Historial" se podrá visualizar el historial de resultados obtenidos
+  * Mediante el botón "Analizar" se realizará la consulta mediante API al servicio de IMAGGA donde se obtendrá las etiquetas de cada imagen
+
+  * Mediante el botón "Historial" se podrá visualizar el historial de resultados obtenidos
