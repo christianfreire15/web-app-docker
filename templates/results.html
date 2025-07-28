@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Análisis</title>
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultados de Imágenes Analizadas</h1>
+
+    {% if results %}
+        {% for item in results %}
+            <div class="card">
+                <img src="{{ item.image_url }}" alt="Imagen" style="max-width: 100%;">
+                <p><strong>Tag 1:</strong> {{ item.tag1 }} ({{ (item.confidence1 * 100)|round(1) }}%)</p>
+                <p><strong>Tag 2:</strong> {{ item.tag2 }} ({{ (item.confidence2 * 100)|round(1) }}%)</p>
+            </div>
+        <hr>
+        {% endfor %}
+    {% else %}
+        <p>No hay resultados disponibles.</p>
+    {% endif %}
+</body>
+</html>

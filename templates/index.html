@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebApp Docker</title>
+</head>
+<body>
+    <h2>Análisis de imágenes con Imagga</h2>
+    <div id="images">
+        <div class="img-block" data-url="https://fastly.picsum.photos/id/106/2592/1728.jpg?hmac=E1-3Hac5ffuCVwYwexdHImxbMFRsv83exZ2EhlYxkgY">
+            <img src="https://fastly.picsum.photos/id/106/2592/1728.jpg?hmac=E1-3Hac5ffuCVwYwexdHImxbMFRsv83exZ2EhlYxkgY" width="200">
+            <p class="result"></p>
+        </div>
+        <div class="img-block" data-url="https://fastly.picsum.photos/id/111/4400/2656.jpg?hmac=leq8lj40D6cqFq5M_NLXkMYtV-30TtOOnzklhjPaAAQ">
+            <img src="https://fastly.picsum.photos/id/111/4400/2656.jpg?hmac=leq8lj40D6cqFq5M_NLXkMYtV-30TtOOnzklhjPaAAQ" width="200">
+            <p class="result"></p>
+        </div>
+        <div class="img-block" data-url="https://fastly.picsum.photos/id/211/1920/1280.jpg?hmac=5feWJpfa59_r1yi4NCuTxY9IWrNWZqEUDIAwrtKId9s">
+            <img src="https://fastly.picsum.photos/id/211/1920/1280.jpg?hmac=5feWJpfa59_r1yi4NCuTxY9IWrNWZqEUDIAwrtKId9s" width="200">
+            <p class="result"></p>
+        </div>
+    </div>
+    <button onclick="analyze()">Analizar</button>
+    <button onclick="history()">Historial</button>
+
+    <script>
+        function analyze() {
+
+            const images = Array.from(document.querySelectorAll(".img-block")).map(div => div.dataset.url);
+            
+            fetch("/analyze", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({images})
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                data.forEach((res, i) => {
+                    
+                    document.querySelectorAll(".result")[i].innerText = `${res.tags[0]} (${res.confidences[0].toFixed(1)}%) | ${res.tags[1]} (${res.confidences[1].toFixed(1)}%)`;
+                
+                });
+            
+            });
+
+        }
+
+        function history() {
+
+            window.location.href = "/results";
+
+        }
+
+    </script>
+</body>
+</html>
